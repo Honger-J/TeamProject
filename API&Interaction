@@ -94,3 +94,44 @@ def puttasktest():
         result4 = str(result4)
     return result4
 
+
+@app.route('/putdeal', methods=['POST'])  # 二手交易管理
+def putdealtest():
+    jwac = request.json.get('jwac')
+    dno = request.json.get('dno')  # 创建或查找tno默认为空
+    title2 = request.json.get('title')
+    label2 = request.json.get('label')
+    content2 = request.json.get('content')
+    method2 = str(request.json.get('method'))
+    result5 = putdeal(jwac, dno, title2, label2, content2, method2)
+    if method2 == 'finddno':
+        result5 = str(result5)
+    return result5
+
+
+@app.route('/prepos', methods=['POST'])  # 顶置任务或者二手交易
+def prepositiontest():
+    jwac = request.json.get('jwac')
+    xno = request.json.get('xno')
+    type = request.json.get('type')
+    result6 = prepos(jwac, xno, type)
+    return result6
+
+
+@app.route('/findtask', methods=['POST'])  # 查询任务列表
+def findtasktest():
+    label = request.json.get('label')
+    title, jwac = findtask(label)
+    return str(title) + str(jwac)
+
+
+@app.route('/findtask', methods=['POST'])  # 查询任务列表
+def finddealtest():
+    label = request.json.get('label')
+    result8 = finddeal(label)
+    return result8
+
+
+if __name__ == '__main__':
+    app.run(host='172.26.78.22', port=5590)
+    ''''''
